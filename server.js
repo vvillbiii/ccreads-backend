@@ -17,6 +17,7 @@ const controllers = require("./controllers");
 app.use(cors());
 app.use(express.json());
 app.use("/articles", controllers.article);
+app.use("/", controllers.auth);
 
 app.get("/", (req, res) => {
   res.send("hello world");
