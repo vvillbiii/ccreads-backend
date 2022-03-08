@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
         expiresIn: "1h",
       }
     );
-    res.header("auth-token", token).json(token, foundUser);
+    res.header("auth-token", token).json({ token, foundUser });
   } catch (error) {
     res.status(400).json(error);
   }
