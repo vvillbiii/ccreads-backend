@@ -4,4 +4,5 @@ module.exports = {
   article: require("../controllers/article"),
   auth: require("../controllers/auth"),
   verifyAuth: require("../controllers/verifyAuth"),
+  //   notes: require("../controllers/notes"),
 };

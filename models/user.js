@@ -28,8 +28,18 @@ const userSchema = new Schema(
       default:
         "https://static.vecteezy.com/system/resources/previews/002/608/327/non_2x/mobile-application-avatar-web-button-menu-digital-silhouette-style-icon-free-vector.jpg",
     },
-    bookmarks: [articleSchema],
-    favoriteArticles: [articleSchema],
+    bookmarks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Article",
+      },
+    ],
+    favoriteArticles: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Article",
+      },
+    ],
   },
   {
     timestamps: true,
