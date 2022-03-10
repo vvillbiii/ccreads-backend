@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const articleSchema = require("../models/article").schema;
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
