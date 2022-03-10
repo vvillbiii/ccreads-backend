@@ -6,5 +6,6 @@ module.exports = {
   verifyAuth: require("../controllers/verifyAuth"),
   bookmarks: require("../controllers/bookmarks"),
   favorites: require("../controllers/favorites"),
-  //   notes: require("../controllers/notes"),
+  user: require("../controllers/user"),
+  notes: require("../controllers/notes"),
 };
