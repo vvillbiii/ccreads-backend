@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const verfiyAuth = require("../controllers/verifyAuth");
 require("dotenv").config();
 
 router.post("/register", async (req, res) => {
@@ -46,14 +47,34 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/users", verfiyAuth, async (req, res) => {
+  const { _id } = req.user;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById({ _id });
     res.json(user);
   } catch (error) {
     res.status(400).json(error);
   }
 });
 
+router.put("/users", async (req, res) => {
+  const { _id } = req.user;
+  const body = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(_id, body);
+    res.json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+router.delete("/users", async (req, res) => {
+  const { _id } = req.user;
+  try {
+    const user = User.findByIdAndDelete({ _id });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 module.exports = router;

@@ -16,8 +16,12 @@ const controllers = require("./controllers");
 
 app.use(cors());
 app.use(express.json());
+
+//routes
 app.use("/articles", controllers.article);
 app.use("/", controllers.auth);
+app.use("/favorites", controllers.favorites);
+app.use("/bookmarks", controllers.bookmarks);
 
 app.get("/", (req, res) => {
   res.send("hello world");

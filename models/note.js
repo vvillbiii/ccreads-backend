@@ -11,10 +11,6 @@ const noteSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Article",
     },
-    title: {
-      type: String,
-      required: true,
-    },
     body: {
       type: String,
       required: true,
