@@ -1,43 +1,37 @@
-// const express = require("express");
-// const router = express.Router();
-// const { User, Article } = require("../models");
-// const mongoose = require("mongoose");
-// const toId = mongoose.Types.ObjectId;
-// //add bookmark to user
-// // const addBookmark = (user, articleId) => {
-// //   User.findByIdAndUpdate(articleId, { $addToSet: {} });
-// // };
+const express = require("express");
+const router = express.Router();
+const { User } = require("../models");
+const verifyAuth = require("../controllers/verifyAuth");
 
-// router.get("/bookmarks/:id/:article", async (req, res) => {
-//   req.params.article = toId(req.params.article);
-//   const id = req.params.id;
-//   try {
-//     const user = await User.findByIdAndUpdate(id, {
-//       $addToSet: { bookmarks: req.params.article },
-//     });
-//     // user.bookmark = req.params.article;
-//     user.save();
-//     res.json(user);
-//   } catch (error) {
-//     res.status(400).json(error);
-//   }
-// });
+router.get("/", verifyAuth, async (req, res) => {
+  const { _id } = req.user;
+  try {
+    const user = await User.findById({ _id });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 
-// router.get("/favorites/:id/:article", async (req, res) => {
-//   req.params.article = toId(req.params.article);
-//   const id = req.params.id;
-//   try {
-//     const user = await User.findByIdAndUpdate(id, {
-//       $addToSet: { favoriteArticles: req.params.article },
-//     });
-//     // user.bookmark = req.params.article;
-//     user.save();
-//     res.json(user);
-//   } catch (error) {
-//     res.status(400).json(error);
-//   }
-// });
+router.put("/", verifyAuth, async (req, res) => {
+  const { _id } = req.user;
+  const body = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(_id, body, { new: true });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 
-// // router.get();
+router.delete("/", verifyAuth, async (req, res) => {
+  const { _id } = req.user;
+  try {
+    const user = User.findByIdAndDelete({ _id });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 
-// module.exports = router;
+module.exports = router;

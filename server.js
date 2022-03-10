@@ -22,6 +22,8 @@ app.use("/articles", controllers.article);
 app.use("/", controllers.auth);
 app.use("/favorites", controllers.favorites);
 app.use("/bookmarks", controllers.bookmarks);
+app.use("/users", controllers.user);
+app.use("/notes", controllers.notes);
 
 app.get("/", (req, res) => {
   res.send("hello world");

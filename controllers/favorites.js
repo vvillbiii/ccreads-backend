@@ -3,9 +3,9 @@ const router = express.Router();
 const { User } = require("../models");
 const mongoose = require("mongoose");
 const toId = mongoose.Types.ObjectId;
-const verfiyAuth = require("../controllers/verifyAuth");
+const verifyAuth = require("../controllers/verifyAuth");
 
-router.get("/:article", verfiyAuth, async (req, res) => {
+router.get("/:article", verifyAuth, async (req, res) => {
   const { _id } = req.user;
   req.params.article = toId(req.params.article);
   try {
@@ -22,7 +22,7 @@ router.get("/:article", verfiyAuth, async (req, res) => {
   }
 });
 
-router.get("/", verfiyAuth, async (req, res) => {
+router.get("/", verifyAuth, async (req, res) => {
   try {
     const { _id } = req.user;
     const user = await User.findById({ _id }).populate("favoriteArticles");
