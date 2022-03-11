@@ -5,9 +5,11 @@ const verifyAuth = require("./verifyAuth");
 const mongoose = require("mongoose");
 const toId = mongoose.Types.ObjectId;
 
-router.post("/", verifyAuth, async (req, res) => {
+router.post("/:article", verifyAuth, async (req, res) => {
   const { _id } = req.user;
-  req.body.user_id = toId(_id);
+  req.body.user = toId(_id);
+  req.params.article = toId(req.params.article);
+  req.body.article = req.params.article;
   const body = req.body;
   try {
     res.json(await Note.create(body));
@@ -19,7 +21,7 @@ router.post("/", verifyAuth, async (req, res) => {
 router.get("/", verifyAuth, async (req, res) => {
   const { _id } = req.user;
   try {
-    res.json(await Note.find({ _id }));
+    res.json(await Note.find({ user: _id }));
   } catch (error) {
     res.status(400).json(error);
   }
