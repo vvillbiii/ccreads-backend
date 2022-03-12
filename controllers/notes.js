@@ -21,7 +21,7 @@ router.post("/:article", verifyAuth, async (req, res) => {
 router.get("/", verifyAuth, async (req, res) => {
   const { _id } = req.user;
   try {
-    res.json(await Note.find({ user: _id }));
+    res.json(await Note.find({ user: _id }).populate("article"));
   } catch (error) {
     res.status(400).json(error);
   }
