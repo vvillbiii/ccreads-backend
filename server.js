@@ -23,6 +23,7 @@ app.use(
 app.use(express.json());
 
 //routes
+app.use("/uploads", express.static("uploads"));
 app.use("/articles", controllers.article);
 app.use("/", controllers.auth);
 app.use("/favorites", controllers.favorites);
