@@ -14,7 +14,12 @@ const dbConnection = require("./config/db.connections");
 //Controllers
 const controllers = require("./controllers");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["Get", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json());
 
 //routes
